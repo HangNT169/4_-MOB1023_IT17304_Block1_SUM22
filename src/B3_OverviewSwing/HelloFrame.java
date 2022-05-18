@@ -5,6 +5,7 @@
 package B3_OverviewSwing;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -98,14 +99,19 @@ public class HelloFrame extends javax.swing.JFrame {
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Hằng", "IS", "Nữ", "Ăn lăn"},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {"a", "IS", "Nam", "Ăn"},
+                {"b", "IS", "Nam", "Lăn"},
+                {"c", "IS", "Nam", null}
             },
             new String [] {
                 "Tên", "Loại", "Giới tính", "Sở thích"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -211,8 +217,22 @@ public class HelloFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-        // TODO add your handling code here:
+        txtName.setText("");// clear text field ve trang thai ban dau
+        cbbLoai.setSelectedIndex(1);// clear combobox ve trang thai ban dau
+        buttonGroup1.clearSelection();
+        cbAn.setSelected(false);
+        cbLan.setSelected(false);
     }//GEN-LAST:event_btnClearActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // click Row => Show ra dong vua chon
+        int row = jTable1.getSelectedRow();
+        TableModel tableModel = jTable1.getModel(); // lay ra model cua table 
+        String ten = tableModel.getValueAt(row, 0).toString();
+        String loai =tableModel.getValueAt(row, 1).toString();
+//        JOptionPane.showMessageDialog(rootPane, loai);
+        txtName.setText(ten);
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
