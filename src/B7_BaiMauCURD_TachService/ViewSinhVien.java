@@ -2,6 +2,7 @@ package B7_BaiMauCURD_TachService;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -308,6 +309,30 @@ public class ViewSinhVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThoatActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // lay toan bo cac thuoc tinh tu ban phim
+        String maSV = txtMSV.getText();
+        String ten = txtName.getText();
+        String tuoi = txtAge.getText();
+        String diaChi = txtDiaChi.getText();
+        boolean isGender = radioNam.isSelected();
+        int gioiTinh = 0;
+        if (isGender == true) {
+            gioiTinh = 1;
+        } else {
+            gioiTinh = 2;
+        }
+        if (maSV.length() == 0) {
+            JOptionPane.showMessageDialog(rootPane, "Yeu cau nhap");
+        } else {
+            // add
+            // Khoi tao 1 doi tuong va gan gia tri 
+            SinhVien sinhVien = new SinhVien(maSV, ten, Integer.valueOf(tuoi), diaChi, gioiTinh);
+            // add vao list
+            listSinhViens.add(sinhVien);
+            // hien thi len table
+            showDataTable(listSinhViens);
+        }
+
 
     }//GEN-LAST:event_btnThemActionPerformed
 
@@ -320,7 +345,7 @@ public class ViewSinhVien extends javax.swing.JFrame {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         String searchName = txtSearch.getText();
-        List<SinhVien>listSearch = new SinhVienService().searchByName(listSinhViens, searchName);
+        List<SinhVien> listSearch = new SinhVienService().searchByName(listSinhViens, searchName);
         showDataTable(listSearch);
     }//GEN-LAST:event_btnSearchActionPerformed
 

@@ -11,7 +11,10 @@ import java.util.Scanner;
  * @author hangnt
  */
 public class Main {
-
+// https://github.com/HangNT164/FPTUniversity_Project
+       // https://openplanning.net/10175/java-regular-expression
+//        https://github.com/AnhDT0407/Course-JavaCore/blob/master/Java-Lesson/Java%208/1.%20Lamda%20Expressions/3.%20So%20s%C3%A1nh%20m%E1%BA%A1nh%20m%E1%BA%BD%20v%E1%BB%9Bi%20Lambda.md
+      
     /**
      * 1. Khi nao xay ra expection? 2. Nhung cach fix khi xay ra expection? 3.
      * Huong dan tu custom 1 expection.
