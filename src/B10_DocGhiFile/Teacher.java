@@ -16,7 +16,6 @@ public class Teacher implements Serializable { // Cho tat ca thuoc tinh khi ghi 
     private int tuoi;
     private String namSinh;
     private String diaChi;
-    private static final long serialVersionUID = 1L;
 
     public Teacher() {
     }
