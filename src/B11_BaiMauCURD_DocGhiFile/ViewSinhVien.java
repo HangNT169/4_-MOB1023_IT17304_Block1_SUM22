@@ -1,4 +1,4 @@
-package B7_BaiMauCURD_TachService;
+package B11_BaiMauCURD_DocGhiFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +17,7 @@ public class ViewSinhVien extends javax.swing.JFrame {
 
     private DefaultTableModel dtm;
     private List<SinhVien> listSinhViens;
+    private String path = "text.txt";
 
     /**
      * Creates new form QLSV
@@ -31,14 +32,14 @@ public class ViewSinhVien extends javax.swing.JFrame {
         String[] headers = {"Ma SV", "Ten", "Tuoi", "Gioi tinh", "Dia chi"};
         dtm.setColumnIdentifiers(headers);
 
-        // load mac dinh 5 phan tu
-        loadDataMacDinh();
-
-        // show data len table
-        showDataTable(listSinhViens);
-
-        // fill data
-        fillData(listSinhViens.size() - 1);
+//        // load mac dinh 5 phan tu
+//        loadDataMacDinh();
+//
+//        // show data len table
+//        showDataTable(listSinhViens);
+//
+//        // fill data
+//        fillData(listSinhViens.size() - 1);
     }
 
     /**
@@ -142,6 +143,7 @@ public class ViewSinhVien extends javax.swing.JFrame {
 
         buttonGroup1.add(radioNam);
         radioNam.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        radioNam.setSelected(true);
         radioNam.setText("Nam");
 
         buttonGroup1.add(radioNu);
@@ -345,10 +347,26 @@ public class ViewSinhVien extends javax.swing.JFrame {
         } else {
             gioiTinh = 2;
         }
-        if (maSV.length() == 0) {
-            JOptionPane.showMessageDialog(rootPane, "Yeu cau nhap");
-        } else {
-            // add
+        /**
+         * 1. Tat ca phai nhap 2. Ten phai la chuoi 3. Tuoi phai la so nguyen
+         * duong
+         */
+        if (maSV.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ma SV trong");
+        } else if (ten.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ten trong");
+        } else if (tuoi.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tuoi trong");
+        } else if (diaChi.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Dia chi  trong");
+        } else if (!ten.matches("[a-z A-Z]+")) {
+            JOptionPane.showMessageDialog(this, "Ten khong dung dinh dang");
+        } else if (!tuoi.matches("\\d+")) {
+            JOptionPane.showMessageDialog(this, "Tuoi khong dung dinh dang");
+        } else if (Integer.valueOf(tuoi) <= 0) {
+            JOptionPane.showMessageDialog(this, "Tuoi phai la so nguyen duong");
+        }else{
+            // add thanh cong
             // Khoi tao 1 doi tuong va gan gia tri 
             SinhVien sinhVien = new SinhVien(maSV, ten, Integer.valueOf(tuoi), diaChi, gioiTinh);
             // add vao list
@@ -356,8 +374,6 @@ public class ViewSinhVien extends javax.swing.JFrame {
             // hien thi len table
             showDataTable(listSinhViens);
         }
-
-
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void tbHienThiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbHienThiMouseClicked
@@ -380,11 +396,12 @@ public class ViewSinhVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btnXapXepActionPerformed
 
     private void btnGhiFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGhiFileActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, new DocGhiFile().ghiFile(path, listSinhViens));
     }//GEN-LAST:event_btnGhiFileActionPerformed
 
     private void btnDocFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDocFileActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, new DocGhiFile().docFile(path, listSinhViens));
+        showDataTable(listSinhViens);
     }//GEN-LAST:event_btnDocFileActionPerformed
 
     private void loadDataMacDinh() {
@@ -444,6 +461,8 @@ public class ViewSinhVien extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ViewSinhVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
